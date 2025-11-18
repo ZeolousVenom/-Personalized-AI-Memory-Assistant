@@ -1,0 +1,39 @@
+# Core Dependencies
+streamlit>=1.28.0
+numpy>=1.24.0
+
+# Vector Database
+pymilvus>=2.3.0
+
+# Embeddings & NLP
+sentence-transformers>=2.2.0
+transformers>=4.30.0
+torch>=2.0.0
+
+# LLM Integration Options
+# Uncomment the one you plan to use:
+
+# Option 1: Ollama (for local Mistral 7B)
+# ollama>=0.1.0
+
+# Option 2: HuggingFace (for local Mistral models)
+# accelerate>=0.20.0
+
+# Option 3: LangChain (optional, for advanced RAG)
+# langchain>=0.1.0
+# langchain-community>=0.0.10
+
+# Option 4: OpenAI API (alternative to Mistral)
+# openai>=1.0.0
+
+# Option 5: Anthropic Claude API (alternative)
+# anthropic>=0.18.0
+
+# Utilities
+python-dotenv>=1.0.0
+pandas>=2.0.0
+pydantic>=2.0.0
+
+# Optional: For better performance
+# faiss-cpu>=1.7.4  # Alternative to Milvus for smaller deployments
+# chromadb>=0.4.0   # Another vector DB alternative

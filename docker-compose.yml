@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Ollama service for running Mistral LLM
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    # Remove the deploy section above if you don't have GPU
+    # For CPU-only, just remove the entire deploy section
+
+  # Streamlit application
+  streamlit-app:
+    build: .
+    container_name: memory-assistant
+    ports:
+      - "8501:8501"
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+      - MODEL_NAME=mistral
+    depends_on:
+      - ollama
+    restart: unless-stopped
+    volumes:
+      - ./app:/app
+      - model_cache:/root/.cache
+
+volumes:
+  ollama_data:
+    driver: local
+  model_cache:
+    driver: local
